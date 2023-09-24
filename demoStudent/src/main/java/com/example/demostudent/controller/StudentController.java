@@ -39,16 +39,23 @@ public class StudentController {
         return new RedirectView("/students");
     }
 
+
     @GetMapping("/editStudent/{id}")
     public String getEditStudent(@PathVariable("id") Long id, Model model) {
         StudentModel student = studentService.getStudentById(id);
         model.addAttribute("studentModel", student);
         return "persons/editPerson";
     }
-
     @PostMapping("/editStudent/{id}")
     public RedirectView postEditStudent(@PathVariable("id") Long id, StudentModel student) {
         studentService.saveEditStudent(student, id);
         return new RedirectView("/students");
     }
+
+    @PostMapping("/del/{id}")
+    public RedirectView delStudent(@PathVariable("id") Long id){
+    studentService.deleteStudent(id);
+    return new RedirectView("/students");
+    }
+
 }
