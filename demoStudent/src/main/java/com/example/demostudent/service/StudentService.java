@@ -12,8 +12,9 @@ import java.util.List;
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
-    public void saveStudent(StudentModel model){
-        studentRepository.save(model);
+
+    public void saveStudent(StudentModel student) {
+        studentRepository.save(student);
     }
 
 
@@ -24,8 +25,21 @@ public class StudentService {
     public StudentModel getStudentById(Long id) {
         return studentRepository.findById(id).orElse(null);
     }
-    public void saveEditStudent(StudentModel student, Long id){
+
+    public void saveEditStudent(StudentModel student, Long id) {
         student.setId(id);
         studentRepository.save(student);
+    }
+
+    public void deleteStudent(Long id) {
+        studentRepository.deleteById(id);
+    }
+
+    public List<StudentModel> getAllStudents() {
+        return getStudentList();
+    }
+
+    public void findSortedNamesOrderByLastNameAsc() {
+        studentRepository.findSortedNamesOrderByLastNameAsc();
     }
 }
