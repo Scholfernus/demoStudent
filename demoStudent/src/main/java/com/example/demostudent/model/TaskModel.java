@@ -16,20 +16,23 @@ import java.util.Date;
 @AllArgsConstructor
 public class TaskModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @Column(name = "deadline")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deadline;
-    private String description;
-    private String color;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date creationDate;
-    public void setId(Long id) {
-        this.id = id;
-    }
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private StudentModel student;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "creation_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date creationDate;
+
+    @ManyToOne
+    private StudentModel studentModel;
 }
