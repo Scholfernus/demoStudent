@@ -57,5 +57,9 @@ public class StudentController {
     studentService.deleteStudent(id);
     return new RedirectView("/students");
     }
-
+    @PostMapping("/sortedListAsc")
+    public RedirectView postSortedList(StudentModel model){
+        studentService.findSortedNamesOrderByLastNameAsc();
+        return new RedirectView("/students");
+    }
 }

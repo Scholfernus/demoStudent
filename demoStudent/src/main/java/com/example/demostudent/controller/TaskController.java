@@ -5,50 +5,76 @@ import com.example.demostudent.model.TaskModel;
 import com.example.demostudent.service.StudentService;
 import com.example.demostudent.service.TaskService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.Date;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Controller
+@RequiredArgsConstructor
 public class TaskController {
-    private final TaskService taskService;
+
+
     private final StudentService studentService;
+    private final TaskService taskService;
+
+
     @GetMapping("/tasks")
-    public String getTaskList(){
+    public String getTaskList(Model model) {
+        List<TaskModel> list = taskService.getTaskList();
+        model.addAttribute("taskModel", list);
         return "tasks/tasks";
     }
+
+
     @GetMapping("/addTask")
-    public String getAddTask(Model model){
-        List<StudentModel> students = studentService.getAllStudents();
-        model.addAttribute("students",students);
+    public String getAddTask(Model model) {
+        List<StudentModel> list = studentService.getStudentList();
+        model.addAttribute("studentModel", list);
         return "tasks/addTask";
     }
+
+
     @PostMapping("/addTask")
-    public RedirectView postAddTask(@RequestParam("studentId") Long studentId,
-                                    @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline,
-                                    @RequestParam("description") String description) {
-
-        // Pobierz odpowiedniego studenta na podstawie studentId
-        StudentModel student = studentService.getStudentById(studentId);
-        TaskModel task = new TaskModel();
-        task.setStudent(student);
-        task.setDeadline(deadline);
-        task.setDescription(description);
-        task.setCreationDate(new Date());
-
-        // Zapisz zadanie w serwisie
+    public RedirectView postAddTask(TaskModel task) {
         taskService.saveTask(task);
-
+        return new RedirectView("/tasks");
+    }
+    @PostMapping("editDescription/{id}")
+    public RedirectView patchDescription(@PathVariable("id") Long id,
+                                         @RequestParam String description){
+        taskService.updateTaskDescription(id, description);
         return new RedirectView("/tasks");
     }
 
-
 }
+
+//    @GetMapping("/tasks")
+//    public String getTaskList(){
+//        return "tasks/tasks";
+//    }
+
+
+//    @PostMapping("/addTask")
+//    public RedirectView postAddTask(@RequestParam("studentId") Long studentId,
+//                                    @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline,
+//                                    @RequestParam("description") String description) {
+//
+//        // Pobierz odpowiedniego studenta na podstawie studentId
+//        StudentModel student = studentService.getStudentById(studentId);
+//        TaskModel task = new TaskModel();
+//        task.setStudent(student);
+//        task.setDeadline(deadline);
+//        task.setDescription(description);
+//        task.setCreationDate(new Date());
+//
+//        // Zapisz zadanie w serwisie
+//        taskService.saveTask(task);
+//
+//        return new RedirectView("/tasks");
+//    }
