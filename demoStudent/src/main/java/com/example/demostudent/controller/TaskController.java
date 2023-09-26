@@ -45,14 +45,30 @@ public class TaskController {
         taskService.saveTask(task);
         return new RedirectView("/tasks");
     }
+
     @PostMapping("editDescription/{id}")
     public RedirectView patchDescription(@PathVariable("id") Long id,
-                                         @RequestParam String description){
+                                         @RequestParam String description) {
         taskService.updateTaskDescription(id, description);
         return new RedirectView("/tasks");
     }
 
+    @GetMapping("/byColor/{name}")
+    public String getColor(@PathVariable String name) {
+        taskService.findByColor(name);
+        return "task/editTask";
+    }
+
+    @GetMapping("/editTask/{id}")
+    public String getTask(@PathVariable("id") Long id, Model model) {
+        List<StudentModel> list = studentService.getStudentList();
+        TaskModel task = taskService.getTaskById(id);
+        model.addAttribute("studentModel", list);
+        model.addAttribute("taskModel", task);
+        return "tasks/editTask";
+    }
 }
+
 
 //    @GetMapping("/tasks")
 //    public String getTaskList(){
