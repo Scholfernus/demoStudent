@@ -7,13 +7,13 @@ import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class StudentModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,12 +24,13 @@ public class StudentModel {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "git_hub")
+    @Column(name = "git_huub")
     private String gitHub;
 
     @Column(name = "start")
     @Size(min = 3)
     private String start;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentModel")
     private Set<TaskModel> tasks = new HashSet<>();
