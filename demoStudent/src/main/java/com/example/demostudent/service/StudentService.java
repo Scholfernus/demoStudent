@@ -39,7 +39,7 @@ public class StudentService {
         return getStudentList();
     }
 
-//    public void findSortedNamesOrderByLastNameAsc() {
-//        studentRepository.findSortedNamesOrderByLastNameAsc();
-//    }
+    public void findSortedNamesOrderByLastNameAsc() {
+        studentRepository.findSortedNamesOrderByLastNameAsc();
+    }
 }
