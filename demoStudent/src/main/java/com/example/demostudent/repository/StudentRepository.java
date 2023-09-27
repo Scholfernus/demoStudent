@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<StudentModel, Long> {
 
-//    List<StudentModel> findSortedNames();
-//    List<StudentModel> findSortedNamesOrderByLastNameAsc();
+    List<StudentModel> findSortedNames();
+    List<StudentModel> findSortedNamesOrderByLastNameAsc();
 
 
 }
