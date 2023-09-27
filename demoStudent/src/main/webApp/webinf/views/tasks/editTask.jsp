@@ -1,3 +1,4 @@
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:useBean id="now" class="java.util.Date"/>
@@ -95,7 +96,7 @@
                                         <label class="col-2 col-form-label">Wybierz kursanta</label>
                                         <div class="col-10">
                                             <select class="form-control" name="studentModel.id">
-                                                <option hidden>wybierz</option>
+                                                <option hidden>${taskModel.studentModel.firstName} ${taskModel.studentModel.lastName}</option>
 
                                                 <c:forEach items="${studentModel}" var="student">
                                                     <option value="${student.id}">${student.firstName} ${student.lastName}</option>
@@ -104,14 +105,14 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="creationDate" value="<fmt:formatDate pattern = "yyyy-MM-dd" value = "${now}" />">
+                                    <input type="hidden" name="creationDate" value="<fmt:formatDate pattern = "yyyy-MM-dd" value = "${taskModel.creationDate}" />">
 
 
                                     <div class="form-group row">
                                         <label class="col-2 col-form-label">Deadline</label>
                                         <div class="col-10">
                                             <input class="form-control" type="date" name="deadline" max ="3000-12-31"
-                                                   min="<fmt:formatDate pattern = "yyyy-MM-dd" value = "${now}" />">
+                                                   min="<fmt:formatDate pattern = "yyyy-MM-dd" value = "${taskModel.deadline}" />">
                                         </div>
                                     </div>
 
@@ -119,7 +120,7 @@
                                     <div class="form-group row">
                                         <label class="col-2 col-form-label">Tresć zadania:</label>
                                         <div class="col-10">
-                                            <textarea class="form-control" rows="5" name="description" placeholder="tutaj opisz zadanie..."></textarea>
+                                            <textarea class="form-control" rows="5" name="description" placeholder="tutaj opisz zadanie...">${taskModel.description}</textarea>
                                         </div>
                                     </div>
 
@@ -138,23 +139,23 @@
                                 <div class="col-md-9 col-sm-9 col-xs-9">
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <label class="radio-inline"><input type="radio" value="success" name="color">
+                                            <label class="radio-inline"><input type="radio" value="success" name="color" <c:if test = "${taskModel.color eq 'success'}">checked</c:if>>
                                                 <i class="btn btn-success btn-circle btn-sm"></i> poziom junior</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label class="radio-inline"><input type="radio" value="info" name="color">
+                                            <label class="radio-inline"><input type="radio" value="info" name="color" <c:if test = "${taskModel.color eq 'info'}">checked</c:if>>
                                                 <i class="btn btn-info btn-circle btn-sm"></i> poziom junior+</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label class="radio-inline"><input type="radio" value="secondary" name="color">
+                                            <label class="radio-inline"><input type="radio" value="secondary" name="color" <c:if test = "${taskModel.color eq 'secondary'}">checked</c:if>>
                                                 <i class="btn btn-secondary btn-circle btn-sm"></i> poziom mid</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label class="radio-inline"><input type="radio" value="primary" name="color">
+                                            <label class="radio-inline"><input type="radio" value="primary" name="color" <c:if test = "${taskModel.color eq 'primary'}">checked</c:if>>
                                                 <i class="btn btn-primary btn-circle btn-sm"></i> poziom mid+</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label class="radio-inline"><input type="radio" value="danger" name="color">
+                                            <label class="radio-inline"><input type="radio" value="danger" name="color" <c:if test = "${taskModel.color eq 'danger'}">checked</c:if>>
                                                 <i class="btn btn-danger btn-circle btn-sm"></i> poziom senior</label>
                                         </div>
 
@@ -184,3 +185,5 @@
 </body>
 
 </html>
+
+    
