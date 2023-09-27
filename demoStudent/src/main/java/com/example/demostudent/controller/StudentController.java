@@ -57,9 +57,9 @@ public class StudentController {
         return new RedirectView("/students");
     }
 
-//    @PostMapping("/sortedListAsc")
-//    public RedirectView postSortedList(StudentModel model) {
-//        studentService.findSortedNamesOrderByLastNameAsc();
-//        return new RedirectView("/students");
-//    }
+    @PostMapping("/sortedListAsc")
+    public RedirectView postSortedList(StudentModel model) {
+        studentService.findSortedNamesOrderByLastNameAsc();
+        return new RedirectView("/students");
+    }
 }
