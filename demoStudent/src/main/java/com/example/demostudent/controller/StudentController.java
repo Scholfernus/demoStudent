@@ -6,12 +6,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -28,6 +28,7 @@ public class StudentController {
         model.addAttribute("studentModel", studentList);
         return "persons/personList";
     }
+
     @GetMapping("/addStudent")
     public String getAddStudent() {
         return "persons/addNewPerson";
@@ -38,6 +39,7 @@ public class StudentController {
         studentService.saveStudent(student);
         return new RedirectView("/students");
     }
+
     @GetMapping("/editStudent/{id}")
     public String getEditStudent(@PathVariable("id") Long id, Model model) {
         StudentModel student = studentService.getStudentById(id);
@@ -57,9 +59,10 @@ public class StudentController {
         return new RedirectView("/students");
     }
 
-    @PostMapping("/sortedListAsc")
-    public RedirectView postSortedList(StudentModel model) {
-        studentService.findSortedNamesOrderByLastNameAsc();
-        return new RedirectView("/students");
-    }
+//    @GetMapping("/sortedListAsc")
+//    public String getSortedListAsc(Model model) {
+//        List<StudentModel> sortedStudents = studentService.findSortedStudentsByLastName();
+//        model.addAttribute("students", sortedStudents);
+//        return "student-list";
+//    }
 }
