@@ -56,7 +56,7 @@ public class TaskController {
     @GetMapping("/byColor/{name}")
     public String getColor(@PathVariable String name) {
         taskService.findByColor(name);
-        return "task/editTask";
+        return "tasks/editTask";
     }
 
     @GetMapping("/editTask/{id}")
@@ -68,14 +68,6 @@ public class TaskController {
         return "tasks/editTask";
     }
 }
-
-
-//    @GetMapping("/tasks")
-//    public String getTaskList(){
-//        return "tasks/tasks";
-//    }
-
-
 //    @PostMapping("/addTask")
 //    public RedirectView postAddTask(@RequestParam("studentId") Long studentId,
 //                                    @RequestParam("deadline") @DateTimeFormat(pattern = "yyyy-MM-dd") Date deadline,
@@ -93,4 +85,9 @@ public class TaskController {
 //        taskService.saveTask(task);
 //
 //        return new RedirectView("/tasks");
+//    }
+
+//    @GetMapping("/tasks")
+//    public String getTaskList(){
+//        return "tasks/tasks";
 //    }
