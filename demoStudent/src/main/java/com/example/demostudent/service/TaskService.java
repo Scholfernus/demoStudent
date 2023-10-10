@@ -27,7 +27,6 @@ public class TaskService {
         return taskRepository.findById(id).orElse(null);
     }
 
-
     public List<TaskModel> findByColor(String name) {
         List<TaskModel> color = taskRepository.findByColor(name);
         log.info("color {}", color);
