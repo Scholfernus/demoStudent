@@ -142,9 +142,6 @@
                             </div>
                         </div>
 
-
-
-
                         <div class="col-lg-10">
 
                             <c:forEach items="${taskModel}" var="task">
